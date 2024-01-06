@@ -1,0 +1,17 @@
+.songContainer {
+  display: flex;
+  justify-content: space-around;
+  height: 100px;
+  width: 100%;
+}
+
+.img {
+  margin: 2px;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  justify-content: space-evenly;
+}

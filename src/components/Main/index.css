@@ -1,0 +1,39 @@
+.mainContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainHead {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.playlistInfo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.playlistImg {
+  margin-left: 15px;
+}
+
+.playlistTitle {
+  display: flex;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.songlist {
+  height: 60vh;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
