@@ -5,14 +5,41 @@ import SongCard from '../SongCard'
 import './index.css'
 
 const Main = () => {
-  const [songs, setSongs] = useState([])
+  const [isShuffled, setIsShuffled] = useState(false)
+  const [originalSongs, setOriginalSongs] = useState([])
+  const [songsToDisplay, setSongsToDisplay] = useState([])
   useEffect(() => {
     fetchSongsWithoutBreaker()?.then(result => {
-      console.log('songs result: ', result.songs)
-      
-      setSongs(result?.songs.map((song: Song) => <SongCard songData={song}/>))
+      setOriginalSongs(result.songs)
+      setSongsToDisplay(result.songs)
     })
   }, [])
+
+  const createSongCards = (song: Song) => {
+    return <SongCard songData={song}/>
+  }
+  // check if unshuffled
+      // run function to shuffle data and save to a new shuffled playlist
+      // return that shuffled playlist
+  // check if shuffled 
+    // return original playlist
+  // toggle state of shuffled/unshuffled 
+// default return original playlist 
+  const handleShuffle = (isCurrentlyShuffled: boolean) => {
+    if (isCurrentlyShuffled) {
+    setSongsToDisplay(originalSongs)
+    } else {
+      const originalSongList = originalSongs.slice()
+      const shuffledSongs: any = []
+      while (originalSongList.length) {
+        const indexToSplice = Math.floor(Math.random() * originalSongList.length)
+        shuffledSongs.push(originalSongList.splice(indexToSplice, 1)[0])
+      }
+      setSongsToDisplay(shuffledSongs)
+    }
+    setIsShuffled(!isCurrentlyShuffled)
+  }
+
   return (
     <div className='mainContainer'>
       <div className='mainHead'>
@@ -26,9 +53,10 @@ const Main = () => {
 
         </div>
       </div>
+      <button onClick={() => handleShuffle(isShuffled)}>{isShuffled ? 'Unshuffle' : 'Shuffle'}</button>
       <div className='songlist'>
       {
-        songs.map((songComponent) => songComponent)
+        songsToDisplay.map((songComponent) => createSongCards(songComponent))
       }
       </div>
     </div>
